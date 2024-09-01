@@ -3,8 +3,9 @@ const app = express();
 const port = 3000;
 const mongoose = require("mongoose");
 require("dotenv").config();
+const userRoutes = require("./routes/UsersRoute");
 
-console.log(process.env.MONGO_URL);
+app.use(express.json());
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -13,6 +14,8 @@ mongoose
   })
   .then(() => console.log("Database connected successfully"))
   .catch((err) => console.log("Database connection error:", err));
+
+app.use("/users", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("HELLO FROM ATM APP");
