@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const mongoose = require("mongoose");
+const path = require("path"); // Add this line
 require("dotenv").config();
 const userRoutes = require("./routes/UsersRoute");
 const transactionRoutes = require("./routes/TransactionsRoute");
@@ -19,8 +20,11 @@ mongoose
 app.use("/users", userRoutes);
 app.use("/transactions", transactionRoutes);
 
+// Serve static files from 'public'
+app.use(express.static(path.join(__dirname, "public")));
+
 app.get("/", (req, res) => {
-  res.send("HELLO FROM ATM APP");
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.listen(port, () => {
