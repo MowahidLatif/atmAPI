@@ -8,20 +8,16 @@ const transactionRoutes = require("./routes/TransactionsRoute");
 
 app.use(express.json());
 
-// Serve static files from 'public'
 app.use(express.static(path.join(__dirname, "public")));
 
-// Serve index.html for the home page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Serve login.html for the login page
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
-// Serve accounts.html for the accounts page
 app.get("/accounts", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "accounts.html"));
 });
