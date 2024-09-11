@@ -1,13 +1,30 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const path = require("path");
 const mongoose = require("mongoose");
-const path = require("path"); // Add this line
 require("dotenv").config();
 const userRoutes = require("./routes/UsersRoute");
 const transactionRoutes = require("./routes/TransactionsRoute");
 
 app.use(express.json());
+
+// Serve static files from 'public'
+app.use(express.static(path.join(__dirname, "public")));
+
+// Serve index.html for the home page
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+// Serve login.html for the login page
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "login.html"));
+});
+
+// Serve accounts.html for the accounts page
+app.get("/accounts", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "accounts.html"));
+});
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -20,13 +37,6 @@ mongoose
 app.use("/users", userRoutes);
 app.use("/transactions", transactionRoutes);
 
-// Serve static files from 'public'
-app.use(express.static(path.join(__dirname, "public")));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(3000, () => {
+  console.log(`App listening on port 3000`);
 });
