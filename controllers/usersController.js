@@ -5,6 +5,7 @@ const User = require("../models/User");
 exports.createUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    console.log("Form data received:", req.body);
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       name,
@@ -18,6 +19,7 @@ exports.createUser = async (req, res) => {
       data: user,
     });
   } catch (error) {
+    console.error("Error during registration:", error.message);
     res.status(400).json({
       success: false,
       error: error.message,
