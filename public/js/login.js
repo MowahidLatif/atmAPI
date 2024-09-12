@@ -12,7 +12,7 @@ document
     }
 
     try {
-      const response = await fetch("/login", {
+      const response = await fetch("/users/loginUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,6 +27,7 @@ document
 
       if (response.status === 200) {
         alert(data.message);
+        localStorage.setItem("token", data.token);
         window.location.href = "/dashboard";
       } else {
         alert(data.error || "Invalid login credentials");
