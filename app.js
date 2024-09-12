@@ -38,7 +38,7 @@ mongoose
   .then(() => console.log("Database connected successfully"))
   .catch((err) => console.log("Database connection error:", err));
 
-app.use("/users", userRoutes);
+app.use("/", userRoutes);
 app.use("/transactions", transactionRoutes);
 
 app.listen(3000, () => {

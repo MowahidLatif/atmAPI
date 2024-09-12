@@ -14,7 +14,7 @@ document
     }
 
     try {
-      const response = await fetch("/register", {
+      const response = await fetch("/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +32,7 @@ document
         alert(data.message);
         window.location.href = "/login";
       } else {
-        alert(data.error);
+        alert(data.error || "An error occurred during registration.");
       }
     } catch (error) {
       alert("Registration failed. Please try again.");

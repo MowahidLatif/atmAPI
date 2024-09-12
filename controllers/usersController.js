@@ -1,15 +1,20 @@
+const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
-// Create a new user
+// Create a new user (Register user)
 exports.createUser = async (req, res) => {
   try {
+    const { name, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
+      name,
+      email,
+      password: hashedPassword,
     });
+
     res.status(201).json({
       success: true,
+      message: "User registered successfully",
       data: user,
     });
   } catch (error) {
@@ -21,17 +26,17 @@ exports.createUser = async (req, res) => {
 };
 
 // Get all users
-exports.getUsers = async (req, res) => {
-  try {
-    const users = await User.find();
-    res.status(200).json({
-      success: true,
-      data: users,
-    });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      error: error.message,
-    });
-  }
-};
+// exports.getUsers = async (req, res) => {
+//   try {
+//     const users = await User.find();
+//     res.status(200).json({
+//       success: true,
+//       data: users,
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       success: false,
+//       error: error.message,
+//     });
+//   }
+// };
