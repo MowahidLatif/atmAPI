@@ -8,12 +8,13 @@
   </head>
   <body>
     <h1>Login Page</h1>
-    <form id="loginForm">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required />
+    <form id="loginForm" action="/login" method="POST">
+      <label for="name">name:</label>
+      <input type="text" id="name" name="name" required />
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required />
       <button type="submit">Login</button>
     </form>
+    <script src="/js/login.js"></script>
   </body>
 </html>
