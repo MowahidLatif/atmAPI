@@ -50,3 +50,20 @@ exports.loginUser = async (req, res) => {
     res.status(500).json({ error: "Login failed" });
   }
 };
+
+exports.infoUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId).populate("accounts");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({
+      name: user.name,
+      email: user.email,
+      accounts: user.accounts,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch user info" });
+  }
+};

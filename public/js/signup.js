@@ -14,7 +14,7 @@ document
     }
 
     try {
-      const response = await fetch("/users", {
+      const response = await fetch("/users/createUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
