@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const userRoutes = require("./routes/UsersRoute");
 const transactionRoutes = require("./routes/TransactionsRoute");
+const accountsRoute = require("./routes/AccountsRoute");
 
 app.use(express.json());
 
@@ -40,6 +41,7 @@ mongoose
 
 app.use("/users", userRoutes);
 app.use("/transactions", transactionRoutes);
+app.use("/accounts", accountsRoute);
 
 app.listen(3000, () => {
   console.log(`App listening on port 3000`);

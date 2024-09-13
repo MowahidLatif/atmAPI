@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const Account = require("../models/Account");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -53,17 +54,35 @@ exports.loginUser = async (req, res) => {
 
 exports.infoUser = async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId).populate("accounts");
+    // Assuming you have user authentication and can get user ID from req.user
+    const userId = req.user.id;
+
+    // Fetch user details
+    const user = await User.findById(userId).select("-password"); // Exclude password
+
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({
+        success: false,
+        error: "User not found.",
+      });
     }
 
-    res.json({
-      name: user.name,
-      email: user.email,
-      accounts: user.accounts,
+    // Fetch user's accounts
+    const accounts = await Account.find({ user: userId });
+
+    res.status(200).json({
+      success: true,
+      data: {
+        name: user.name,
+        email: user.email,
+        accounts: accounts, // Ensure this is an array
+      },
     });
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch user info" });
+    console.error("Error fetching user info:", error);
+    res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
   }
 };

@@ -18,13 +18,14 @@ async function fetchUserInfo() {
     document.getElementById("user-email").textContent = data.email;
 
     const accountsList = document.getElementById("accounts-list");
-
     accountsList.innerHTML = "";
 
     if (Array.isArray(data.accounts) && data.accounts.length > 0) {
       data.accounts.forEach((account) => {
         const listItem = document.createElement("li");
-        listItem.textContent = `${account.type} - ${account.name} (Balance: $${account.balance})`;
+        listItem.textContent = `${account.type} - ${
+          account.name
+        } (Balance: $${account.balance.toFixed(2)})`;
         accountsList.appendChild(listItem);
       });
     } else {
