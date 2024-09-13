@@ -7,16 +7,28 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <!-- Placeholder for Nav -->
     <div id="nav-placeholder"></div>
 
     <h1>Dashboard Page</h1>
     <p>Log in was Successful</p>
 
-    <!-- Placeholder for Footer -->
-    <div id="footer-placeholder"></div>
+    <!-- User Info Section -->
+    <div id="user-info">
+      <h2>Welcome, <span id="user-name"></span>!</h2>
+      <p>Email: <span id="user-email"></span></p>
+    </div>
 
-    <!-- Include your JavaScript file to load components -->
+    <!-- Accounts Section -->
+    <div id="accounts-section">
+      <h2>Your Accounts:</h2>
+      <ul id="accounts-list">
+        <!-- Accounts will be populated here -->
+      </ul>
+    </div>
+
+    <div id="footer-placeholder"></div>
     <script src="/js/load-components.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <!-- Add this line -->
   </body>
 </html>
