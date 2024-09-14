@@ -4,25 +4,26 @@ document
     e.preventDefault();
 
     const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    const type = document.getElementById("type").value;
+    const balance = document.getElementById("balance").value;
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
+    if (!name) {
+      alert("Name is missing!");
+    }
+    if (!type) {
+      alert("Type is missing!");
     }
 
     try {
-      const response = await fetch("/users/createUser", {
+      const response = await fetch("/accounts/createAccount", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: name,
-          email: email,
-          password: password,
+          type: type,
+          balance: balance || 0,
         }),
       });
 

@@ -17,9 +17,7 @@ exports.createAccount = async (req, res) => {
       name,
       type,
       user,
-      // balance is set to default (0) if not provided
       balance: req.body.balance || 0,
-      // Initialize transactions array if provided
       transactions: req.body.transactions || [],
     });
 
